@@ -1,6 +1,8 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ethers } from 'ethers';
 import { erc721Abi } from './abi/erc721'
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 
 const transferEventHash = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 // transferSingleEventHash represents the keccak256 hash of TransferSingle(address,address,address,uint256,uint256)
@@ -15,7 +17,7 @@ export class AppService implements OnModuleInit {
   provider: any;
   // transferEventHash represents the keccak256 hash of Transfer(address,address,uint256)
 
-  constructor() {}
+  constructor(@InjectQueue('transfer') private readonly transferQueue: Queue) {}
   getHello(): string {
     return 'Hello World!';
   }
@@ -60,9 +62,14 @@ export class AppService implements OnModuleInit {
   async handleTransferEvent(log) {
     const abi = erc721Abi;
     const iface = new ethers.utils.Interface(abi);
-    console.log(log)
+    console.log('log')
     let events = iface.parseLog(log)
-    console.log(events);
+    console.log('events');
+    await this.transferQueue.add('transfer', 
+      {event: events},
+      {removeOnComplete: true, attempts: 10}
+    );
+    // console.log(job)
   }
 
   async handleTransferSingleEvent(log) {
