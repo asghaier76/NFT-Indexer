@@ -27,6 +27,7 @@
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^8.0.0",
     "bull": "^4.9.0",
+    "dotenv": "^16.0.2",
     "ethers": "^5.7.0",
     "mongoose": "^6.6.0",
     "reflect-metadata": "^0.1.13",
