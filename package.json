@@ -1,8 +1,8 @@
 {
   "name": "indexer",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "NFT events indexer",
+  "author": "Ahmad Sghaier",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
