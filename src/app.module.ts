@@ -4,8 +4,12 @@ import { AppService } from './app.service';
 import { BullModule } from '@nestjs/bull';
 import { TransferOwnershipModule } from './consumers/transfer-ownership/transfer-ownership.module';
 import { TransferModule } from './consumers/transfer/transfer.module';
+import { TransferSingleModule } from './consumers/transferSingle/transfer-single.module';
+import { TransferBatchModule } from './consumers/transferBatch/transfer-batch.module';
+import { UriModule } from './consumers/uri/uri.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MONGO_DB_CONFIG } from './config/database';
+import { SingleTransferOwnershipModule } from './consumers/single-transfer-ownership/single-transfer-ownership.module';
 
 @Module({
   imports: [
@@ -20,7 +24,19 @@ import { MONGO_DB_CONFIG } from './config/database';
         name: 'transfer',
       },
       {
+        name: 'transferSingle',
+      },
+      {
+        name: 'transferBatch',
+      },
+      {
+        name: 'uri',
+      },
+      {
         name: 'transferOwnership',
+      },
+      {
+        name: 'singleTransferOwnership',
       }
     ),
     MongooseModule.forRoot(`${MONGO_DB_CONFIG.connectStr}?authSource=admin`, {
@@ -28,7 +44,11 @@ import { MONGO_DB_CONFIG } from './config/database';
       useUnifiedTopology: true,
     }),
     TransferModule,
-    TransferOwnershipModule
+    TransferSingleModule,
+    TransferBatchModule,
+    TransferOwnershipModule,
+    SingleTransferOwnershipModule,
+    UriModule,
   ],
   controllers: [AppController],
   providers: [AppService],

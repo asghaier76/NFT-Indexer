@@ -54,10 +54,14 @@ export class AppService implements OnModuleInit {
               }
               break;
             case transferSingleEventHash:
+              this.addToQueue('transferSingle', 'transferSingleQueue', log);
+              this.addToQueue('singleTransferOwnership', 'singleTransferOwnershipQueue', log);
               break;
             case transferBatchEventHash:
+              this.addToQueue('transferBatch', 'transferBatchQueue', log);
               break;
             case uriEventHash:
+              this.addToQueue('uri', 'uriQueue', log);
               break;
           }
         });
