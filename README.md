@@ -2,7 +2,9 @@
 
 ## Description
 
-NFT Indexer is an indexing service that utilize Bull manager to queue transfer events for ERC721 and ERC1155 and store those transfer events and the related ownership records.
+NFT Indexer is an indexing service that utilize Bull manager to queue transfer events for ERC721 and ERC1155 and store those transfer events and the related ownership records based on the below depicted architecture.
+
+![NFT Indexer Architecture](NFT_Indexer_Arch.png)
 
 ## Installation
 
